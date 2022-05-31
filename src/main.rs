@@ -1,13 +1,18 @@
-#![allow(dead_code)]
+use std::io;
 
+fn main() -> io::Result<()>{
+    let mut input = String::new();
+    io::stdin().read_line(&mut input)?;
 
-fn main() {
-    let x = solution("23");  
+    let x = solution(&input);
+
     println!("{:?}", x);
+
+    Ok(())
 }
 
 fn solution(digits: &str) -> Vec<String>{
-    let first_digit = digits.chars().nth(0);
+    let first_digit   = digits.chars().nth(0);
     let first_letters = digit_to_letters(first_digit);
 
     let mut result = vec![];
