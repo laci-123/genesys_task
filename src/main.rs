@@ -2,8 +2,8 @@
 
 
 fn main() {
-     
-    println!("Hello, world!");
+    let x = solution("23");  
+    println!("{:?}", x);
 }
 
 fn solution(digits: &str) -> Vec<String>{
@@ -19,9 +19,14 @@ fn solution(digits: &str) -> Vec<String>{
 }
 
 fn add_first_letter(first: char, letters: Vec<String>) -> Vec<String>{
-    letters.iter()
-           .map(|letter| format!("{}{}", first, letter))
-           .collect()
+    if letters.len() == 0{
+        vec![first.to_string()]
+    }
+    else{
+        letters.iter()
+               .map(|letter| format!("{}{}", first, letter))
+               .collect()
+    }
 }
 
 fn digit_to_letters(digit: Option<char>) -> &'static str{
