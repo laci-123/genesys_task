@@ -6,6 +6,12 @@ fn main() {
     println!("Hello, world!");
 }
 
+fn add_first_letter(first: char, letters: Vec<String>) -> Vec<String>{
+    letters.iter()
+           .map(|letter| format!("{}{}", first, letter))
+           .collect()
+}
+
 fn digit_to_letters(digit: Option<char>) -> &'static str{
     match digit{
         Some('2') => "abc", 
