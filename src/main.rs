@@ -12,13 +12,13 @@ fn solution(digits: &str) -> Vec<String>{
 
     let mut result = vec![];
     for letter in first_letters.chars(){
-        result.append(&mut add_first_letter(letter, solution(&digits[1..]))); 
+        result.append(&mut concat_every_letter(letter, solution(&digits[1..]))); 
     }
 
     result
 }
 
-fn add_first_letter(first: char, letters: Vec<String>) -> Vec<String>{
+fn concat_every_letter(first: char, letters: Vec<String>) -> Vec<String>{
     if letters.len() == 0{
         vec![first.to_string()]
     }
