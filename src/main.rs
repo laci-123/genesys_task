@@ -2,8 +2,20 @@
 
 
 fn main() {
-    
+     
     println!("Hello, world!");
+}
+
+fn solution(digits: &str) -> Vec<String>{
+    let first_digit = digits.chars().nth(0);
+    let first_letters = digit_to_letters(first_digit);
+
+    let mut result = vec![];
+    for letter in first_letters.chars(){
+        result.append(&mut add_first_letter(letter, solution(&digits[1..]))); 
+    }
+
+    result
 }
 
 fn add_first_letter(first: char, letters: Vec<String>) -> Vec<String>{
