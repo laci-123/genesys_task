@@ -17,19 +17,19 @@ fn solution(digits: &str) -> Vec<String>{
 
     let mut result = vec![];
     for letter in first_letters.chars(){
-        result.append(&mut concat_every_letter(letter, solution(&digits[1..]))); 
+        result.append(&mut concat_every_string(letter, solution(&digits[1..]))); 
     }
 
     result
 }
 
-fn concat_every_letter(first: char, letters: Vec<String>) -> Vec<String>{
-    if letters.len() == 0{
+fn concat_every_string(first: char, strings: Vec<String>) -> Vec<String>{
+    if strings.len() == 0{
         vec![first.to_string()]
     }
     else{
-        letters.iter()
-               .map(|letter| format!("{}{}", first, letter))
+        strings.iter()
+               .map(|string| format!("{}{}", first, string))
                .collect()
     }
 }
@@ -44,7 +44,7 @@ fn digit_to_letters(digit: Option<char>) -> &'static str{
         Some('7') => "pqrs", 
         Some('8') => "tuv", 
         Some('9') => "wxyz", 
-        Some(_)   => "",     // invalid input
+        Some(_)   => "",     // invalid input (e.g. '\n' read from stdin)
         None      => "",     // end of input
     }
 }
@@ -54,32 +54,32 @@ mod test{
     use super::*;
 
     #[test]
-    fn concat_every_letter_empty_vec(){
-        let x = concat_every_letter('a', vec![]);
+    fn concat_every_string_empty_vec(){
+        let x = concat_every_string('a', vec![]);
         assert_eq!(x, vec!["a"]);
     }
 
     #[test]
-    fn concat_every_letter_empty_string(){
-        let x = concat_every_letter('b', vec!["".to_string()]);
+    fn concat_every_string_empty_string(){
+        let x = concat_every_string('b', vec!["".to_string()]);
         assert_eq!(x, vec!["b"]);
     }
 
     #[test]
-    fn concat_every_letter_empty_strings(){
-        let x = concat_every_letter('b', vec!["".to_string(), "".to_string(), "".to_string()]);
+    fn concat_every_string_empty_strings(){
+        let x = concat_every_string('b', vec!["".to_string(), "".to_string(), "".to_string()]);
         assert_eq!(x, vec!["b", "b", "b"]);
     }
 
     #[test]
-    fn concat_every_letter_one(){
-        let x = concat_every_letter('c', vec!["abc".to_string()]);
+    fn concat_every_string_one(){
+        let x = concat_every_string('c', vec!["abc".to_string()]);
         assert_eq!(x, vec!["cabc"]);
     }
     
     #[test]
-    fn concat_every_letter_many(){
-        let x = concat_every_letter('d', vec!["a".to_string(), 
+    fn concat_every_string_many(){
+        let x = concat_every_string('d', vec!["a".to_string(), 
                                               "ab".to_string(), 
                                               "abc".to_string(), 
                                               "abcd".to_string()]);
@@ -136,5 +136,8 @@ mod test{
 
         let sol3 = solution("23456789");
         assert!(is_ordered(&sol3));
+
+        let sol4 = solution("98765432");
+        assert!(is_ordered(&sol4));
     }
 }
