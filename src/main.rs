@@ -12,8 +12,8 @@ fn main() -> io::Result<()>{
 }
 
 fn solution(digits: &str) -> Vec<String>{
-    let first_digit   = digits.chars().nth(0);
-    let first_letters = digit_to_letters(first_digit);
+    let maybe_first_digit = digits.chars().nth(0);
+    let first_letters     = digit_to_letters(maybe_first_digit);
 
     let mut result = vec![];
     for letter in first_letters.chars(){
@@ -44,7 +44,7 @@ fn digit_to_letters(digit: Option<char>) -> &'static str{
         Some('7') => "pqrs", 
         Some('8') => "tuv", 
         Some('9') => "wxyz", 
-        Some(_)   => "",
-        None      => "", 
+        Some(_)   => "",     // invalid input
+        None      => "",     // end of input
     }
 }
